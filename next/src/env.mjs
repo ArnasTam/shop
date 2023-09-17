@@ -11,7 +11,7 @@ export const env = createEnv({
       .string()
       .url(),
     NODE_ENV: z
-      .enum(["development", "test", "production"])
+      .enum(["development", "preview", "production"])
       .default("development"),
     NEXTAUTH_SECRET: z.string().min(1).optional(),
     NEXTAUTH_URL: z.preprocess(

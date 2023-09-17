@@ -1,0 +1,23 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: shop
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
+    ports:
+      - '3306:3306'
+    volumes:
+      - ./mysql-data:/var/lib/mysql # Persist MySQL data (optional)
+  next:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - mysql
+    environment:
+      DATABASE_URL: mysql://localhost:3306/shop
+    ports:
+      - '3000:3000'
